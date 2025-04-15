@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Página de Produtos - Modelo Genérico" />
-  <title>Produtos - Modelo</title>
+  <meta name="description" content="Detalhes do Produto - Empresa Equipamentos Industriais" />
+  <title>Detalhes do Produto - Empresa</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -15,14 +15,13 @@
           colors: {
             primary: '#802A31',
             accent: '#C66B31',
-            neutral: '#333',
-            background: '#F5F5F5',
+            background: '#F5F5F5'
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-        },
-      },
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
     };
   </script>
 
@@ -30,133 +29,180 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 </head>
 
-<body class="bg-background text-neutral font-sans">
-  <!-- Navbar dinâmica -->
-  <div id="navbar"></div>
+<body class="bg-background font-sans text-neutral select-none overflow-x-hidden">
 
-  <!-- Conteúdo Principal -->
-  <main class="mt-24 px-4">
-    <!-- Barra de Busca -->
-    <div class="max-w-7xl mx-auto mb-6">
-      <div class="flex items-center bg-white shadow-md rounded-lg overflow-hidden">
-        <span class="px-4 text-primary text-xl"><i class="fas fa-search"></i></span>
-        <input type="text" id="searchInput" placeholder="Buscar produtos..." class="w-full py-3 px-4 text-base focus:outline-none" oninput="filterProducts()" />
+  <!-- Navbar -->
+  <div id="navbar">
+    <div class="flex justify-between items-center py-4 px-6 bg-primary text-white">
+      <div class="text-lg font-semibold">Loja</div>
+      <div class="flex items-center">
+        <i class="fas fa-shopping-cart mr-4"></i>
+        <span id="cart-count" class="text-xl">0</span> <!-- Contagem do carrinho -->
       </div>
     </div>
+  </div>
 
-    <!-- Produtos -->
-    <section id="productContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-      <!-- Produtos carregados dinamicamente -->
-    </section>
+  <!-- Conteúdo -->
+  <main class="container mx-auto px-4 sm:px-6 pt-24 pb-16 min-h-[calc(100vh-160px)]">
+    <div id="product-detail" class="bg-white p-6 rounded-xl shadow-lg"></div>
   </main>
 
-  <!-- Footer dinâmica -->
-  <div id="footer" class="mt-12"></div>
+  <!-- Modal de imagem -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50" onclick="handleBackdropClick(event)">
+    <div class="relative max-w-[90%] max-h-[90%] flex items-center">
+      <button onclick="prevImage()" class="text-white text-3xl absolute left-[-2.5rem] hover:scale-125 transition z-10">
+        <i class="fas fa-chevron-left"></i>
+      </button>
 
-  <!-- Script de produtos -->
+      <img id="modal-image" class="max-w-full max-h-[80vh] rounded-xl border border-white shadow-xl" alt="Imagem do Produto" />
+
+      <button onclick="nextImage()" class="text-white text-3xl absolute right-[-2.5rem] hover:scale-125 transition z-10">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <button onclick="closeModal()" class="absolute top-2 right-2 bg-white text-black text-2xl rounded-full w-9 h-9 flex items-center justify-center hover:scale-110 transition z-10">
+        &times;
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="layout.js"></script>
   <script>
-    let allProducts = [];
+    let currentImageIndex = 0;
+    let images = [];
 
-    async function loadProducts() {
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchProductDetails();
+      updateCartCount();
+    });
+
+    async function fetchProductDetails() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
+
       try {
         const response = await fetch('produtos.json');
-        allProducts = await response.json();
-        renderProducts(allProducts);
+        const produtos = await response.json();
+        const produto = produtos.find(p => p.id === parseInt(productId));
+
+        if (produto) {
+          renderProductDetail(produto);
+        } else {
+          document.getElementById('product-detail').innerHTML = '<p class="text-red-500">Produto não encontrado.</p>';
+        }
       } catch (error) {
-        console.error("Erro ao carregar produtos:", error);
+        console.error('Erro ao carregar produto:', error);
       }
     }
 
-    function renderProducts(produtos) {
-      const container = document.getElementById('productContainer');
-      container.innerHTML = '';
+    function renderProductDetail(produto) {
+      const container = document.getElementById('product-detail');
+      images = produto.imagens;
 
-      if (produtos.length === 0) {
-        container.innerHTML = '<p class="col-span-full text-center text-gray-600 text-lg">Nenhum produto encontrado.</p>';
-        return;
-      }
+      const imagensHtml = produto.imagens.map((img, i) =>
+        `<img src="${img}" alt="${produto.nome}" class="rounded-xl object-cover w-full cursor-pointer hover:scale-105 transition shadow" onclick="openModal(${i})" />`
+      ).join('');
 
-      produtos.forEach(produto => {
-        const descricaoLimitada = produto.descricao.length > 100
-          ? produto.descricao.slice(0, 100) + '...'
-          : produto.descricao;
+      const detalhesHtml = `
+        <h1 class="text-3xl font-bold text-primary mb-4">${produto.nome}</h1>
+        <p class="text-gray-700 mb-4">${produto.descricao}</p>
+        <h2 class="text-xl font-semibold mb-2">Detalhes:</h2>
+        <ul class="list-disc list-inside text-gray-700 mb-4">
+          ${produto.detalhes.map(item => `<li>${item}</li>`).join('')}
+        </ul>
+        <p class="text-xl font-bold text-primary mb-6">${produto.preco}</p>
+        <div class="flex flex-wrap gap-4 mb-6">
+          <button class="bg-primary hover:bg-accent text-white py-2 px-6 rounded-lg transition" onclick="addToCart(${produto.id})">
+            <i class="fas fa-cart-plus mr-2"></i>Adicionar ao Carrinho
+          </button>
+          <button class="bg-accent hover:bg-gray-500 text-white py-2 px-6 rounded-lg transition" onclick="buyNow(${produto.id})">
+            <i class="fas fa-credit-card mr-2"></i>Comprar Agora
+          </button>
+        </div>
+        <a href="produtos.html" class="inline-block bg-gray-200 text-primary py-2 px-6 rounded-lg hover:bg-gray-300 transition">
+          <i class="fas fa-arrow-left mr-2"></i>Voltar
+        </a>
+      `;
 
-        const card = document.createElement('div');
-        card.className = 'bg-white p-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105';
-
-        card.innerHTML = `
-          <img src="${produto.imagens[0]}" alt="${produto.nome}" class="rounded-md mb-4 w-full h-48 object-cover transition-transform duration-300 hover:scale-105">
-          <h2 class="text-2xl font-semibold text-primary mb-2">${produto.nome}</h2>
-          <p class="text-sm text-neutral mb-2">${descricaoLimitada}</p>
-          <p class="text-lg font-bold text-accent">${produto.preco}</p>
-          <div class="flex space-x-2 mt-4">
-            <button class="bg-primary hover:bg-accent text-white py-2 px-4 rounded-lg add-to-cart-btn flex items-center gap-2 transition duration-300" data-id="${produto.id}">
-              <i class="fas fa-cart-plus cart-icon transition-transform duration-300"></i> 
-              <span class="btn-text">Adicionar</span>
-            </button>
-            <a href="detalhes.html?id=${produto.id}" class="bg-accent hover:bg-primary text-white py-2 px-4 rounded-lg flex items-center gap-2 transition duration-300">
-              <i class="fas fa-search"></i> Detalhes
-            </a>
-          </div>
-        `;
-
-        container.appendChild(card);
-      });
-
-      bindCartButtons();
+      container.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">${imagensHtml}</div>
+          <div>${detalhesHtml}</div>
+        </div>
+      `;
     }
 
-    function filterProducts() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      const filtered = allProducts.filter(p =>
-        p.nome.toLowerCase().includes(input) ||
-        p.descricao.toLowerCase().includes(input)
-      );
-      renderProducts(filtered);
+    function addToCart(productId) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(productId);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      alert('Produto adicionado ao carrinho!');
     }
 
-    function bindCartButtons() {
-      document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-        button.addEventListener('click', () => {
-          const id = button.dataset.id;
-          const cart = JSON.parse(localStorage.getItem('cart')) || [];
-          cart.push(id);
-          localStorage.setItem('cart', JSON.stringify(cart));
-          updateCartCount();
+    function buyNow(productId) {
+      // Adicionar o produto ao carrinho
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(productId);
+      localStorage.setItem('cart', JSON.stringify(cart));
 
-          const icon = button.querySelector('.cart-icon');
-          const text = button.querySelector('.btn-text');
+      // Atualizar o contador do carrinho
+      updateCartCount();
 
-          icon.classList.replace('fa-cart-plus', 'fa-spinner');
-          icon.classList.add('animate-spin');
-          text.textContent = 'Adicionando...';
-          button.classList.add('animate-pulse');
-          button.disabled = true;
-
-          setTimeout(() => {
-            icon.classList.remove('animate-spin');
-            icon.classList.replace('fa-spinner', 'fa-cart-plus');
-            text.textContent = 'Adicionar';
-            button.classList.remove('animate-pulse');
-            button.disabled = false;
-          }, 800);
-        });
-      });
+      // Redirecionar para a página de checkout
+      window.location.href = `checkout.html?productId=${productId}`;
     }
 
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const countElement = document.getElementById('cart-count');
-      if (countElement) countElement.textContent = cart.length;
+      const cartCount = document.getElementById('cart-count');
+      if (cartCount) cartCount.textContent = cart.length;
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadProducts();
-      updateCartCount();
-    });
-  </script>
+    function openModal(index) {
+      currentImageIndex = index;
+      showImage();
+      const modal = document.getElementById('modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.addEventListener('keydown', handleKeyPress);
+    }
 
-  <!-- Layout Dinâmico -->
-  <script src="layout.js"></script>
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.removeEventListener('keydown', handleKeyPress);
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'modal') closeModal();
+    }
+
+    function handleKeyPress(e) {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    }
+
+    function showImage() {
+      const modalImage = document.getElementById('modal-image');
+      modalImage.src = images[currentImageIndex];
+    }
+
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      showImage();
+    }
+
+    function prevImage() {
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      showImage();
+    }
+  </script>
 </body>
 </html>
