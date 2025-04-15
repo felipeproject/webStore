@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Detalhes do Produto - Empresa Equipamentos Industriais" />
-  <title>Detalhes do Produto - Empresa</title>
+  <meta name="description" content="Detalhes do Produto - Loja Online" />
+  <title>Detalhes do Produto - Loja Online</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,7 +32,15 @@
 <body class="bg-background font-sans text-neutral select-none overflow-x-hidden">
 
   <!-- Navbar -->
-  <div id="navbar"></div>
+  <div id="navbar">
+    <div class="flex justify-between items-center py-4 px-6 bg-primary text-white">
+      <div class="text-lg font-semibold">Loja Online</div>
+      <div class="flex items-center">
+        <i class="fas fa-shopping-cart mr-4"></i>
+        <span id="cart-count" class="text-xl">0</span> <!-- Contagem do carrinho -->
+      </div>
+    </div>
+  </div>
 
   <!-- Conteúdo -->
   <main class="container mx-auto px-4 sm:px-6 pt-24 pb-16 min-h-[calc(100vh-160px)]">
@@ -137,6 +145,15 @@
     }
 
     function buyNow(productId) {
+      // Adicionar o produto ao carrinho
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(productId);
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Atualizar o contador do carrinho
+      updateCartCount();
+
+      // Redirecionar para a página de checkout
       window.location.href = `checkout.html?productId=${productId}`;
     }
 
