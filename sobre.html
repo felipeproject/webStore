@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sobre" />
+  <title>Sobre</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#802A31',
+            accent: '#C66B31',
+            background: '#F5F5F5',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-background text-neutral font-sans">
+  <!-- Navbar dinâmica -->
+  <div id="navbar"></div>
+
+  <!-- HERO -->
+  <section class="relative bg-white py-20 px-6 shadow-md mt-24">
+    <div class="max-w-6xl mx-auto text-center">
+      <h1 class="text-5xl font-bold text-primary mb-4">Sobre a Empresa</h1>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+        Aqui você encontra informações sobre a nossa história e missão.
+      </p>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="max-w-5xl mx-auto px-6 py-16 text-justify">
+    <div class="space-y-6 text-lg leading-relaxed">
+      <p>
+        Somos uma empresa dedicada ao fornecimento de soluções industriais de alta qualidade. Nosso compromisso é fornecer produtos e serviços que atendam às necessidades específicas dos nossos clientes, sempre com foco na inovação e excelência.
+      </p>
+      <p>
+        Desde nossa fundação, temos trabalhado para expandir nossas operações e melhorar continuamente a qualidade dos nossos serviços. Acreditamos em parcerias duradouras e no desenvolvimento de soluções que realmente impactem positivamente o mercado.
+      </p>
+      <p>
+        Com uma equipe de profissionais altamente qualificados e uma infraestrutura moderna, estamos preparados para oferecer o melhor atendimento e os melhores produtos do setor.
+      </p>
+    </div>
+  </section>
+
+  <!-- DESTAQUES -->
+  <section class="bg-white py-16 shadow-inner">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center text-primary mb-10">Nosso Diferencial</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 text-center">
+        <div class="bg-background rounded-xl p-6 hover:shadow-lg transition duration-300">
+          <i class="fas fa-industry text-4xl text-primary mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Inovação</h3>
+          <p>Focamos em trazer as mais recentes inovações tecnológicas para nossos produtos.</p>
+        </div>
+        <div class="bg-background rounded-xl p-6 hover:shadow-lg transition duration-300">
+          <i class="fas fa-users-cog text-4xl text-primary mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Equipe Especializada</h3>
+          <p>Nossa equipe é composta por profissionais altamente qualificados e experientes.</p>
+        </div>
+        <div class="bg-background rounded-xl p-6 hover:shadow-lg transition duration-300">
+          <i class="fas fa-tools text-4xl text-primary mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Qualidade</h3>
+          <p>Garantimos a máxima qualidade em todos os nossos produtos e serviços.</p>
+        </div>
+        <div class="bg-background rounded-xl p-6 hover:shadow-lg transition duration-300">
+          <i class="fas fa-handshake text-4xl text-primary mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Parcerias Estratégicas</h3>
+          <p>Trabalhamos com os melhores fornecedores e parceiros para garantir qualidade.</p>
+        </div>
+        <div class="bg-background rounded-xl p-6 hover:shadow-lg transition duration-300">
+          <i class="fas fa-map-marked-alt text-4xl text-primary mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Presença Nacional</h3>
+          <p>Estamos presentes em todo o território nacional, atendendo a diversos setores.</p>
+        </div>
+        <div class="bg-background rounded-xl p-6 hover:shadow-lg transition duration-300">
+          <i class="fas fa-award text-4xl text-primary mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Reconhecimento</h3>
+          <p>Nosso compromisso com a qualidade tem sido reconhecido em diversos prêmios e certificações.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer dinâmica -->
+  <div id="footer"></div>
+
+  <!-- Script layout -->
+  <script src="layout.js"></script>
+</body>
+</html>

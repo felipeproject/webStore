@@ -1,0 +1,197 @@
+[
+    {
+        "id": 1,
+        "nome": "Produto 1",
+        "descricao": "Descrição breve do Produto 1. Produto de alta qualidade.",
+        "preco": "R$ 100,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+1"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 1",
+            "Detalhe 2 do Produto 1"
+        ]
+    },
+    {
+        "id": 2,
+        "nome": "Produto 2",
+        "descricao": "Descrição breve do Produto 2. Produto resistente e durável.",
+        "preco": "R$ 150,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+2"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 2",
+            "Detalhe 2 do Produto 2"
+        ]
+    },
+    {
+        "id": 3,
+        "nome": "Produto 3",
+        "descricao": "Descrição breve do Produto 3. Ideal para diversos usos.",
+        "preco": "R$ 200,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+3"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 3",
+            "Detalhe 2 do Produto 3"
+        ]
+    },
+    {
+        "id": 4,
+        "nome": "Produto 4",
+        "descricao": "Descrição breve do Produto 4. Produto de tecnologia avançada.",
+        "preco": "R$ 250,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+4"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 4",
+            "Detalhe 2 do Produto 4"
+        ]
+    },
+    {
+        "id": 5,
+        "nome": "Produto 5",
+        "descricao": "Descrição breve do Produto 5. Produto multifuncional.",
+        "preco": "R$ 300,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+5"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 5",
+            "Detalhe 2 do Produto 5"
+        ]
+    },
+    {
+        "id": 6,
+        "nome": "Produto 6",
+        "descricao": "Descrição breve do Produto 6. Produto compacto e eficiente.",
+        "preco": "R$ 350,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+6"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 6",
+            "Detalhe 2 do Produto 6"
+        ]
+    },
+    {
+        "id": 7,
+        "nome": "Produto 7",
+        "descricao": "Descrição breve do Produto 7. Solução inovadora para sua necessidade.",
+        "preco": "R$ 400,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+7"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 7",
+            "Detalhe 2 do Produto 7"
+        ]
+    },
+    {
+        "id": 8,
+        "nome": "Produto 8",
+        "descricao": "Descrição breve do Produto 8. Ideal para quem busca praticidade.",
+        "preco": "R$ 450,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+8"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 8",
+            "Detalhe 2 do Produto 8"
+        ]
+    },
+    {
+        "id": 9,
+        "nome": "Produto 9",
+        "descricao": "Descrição breve do Produto 9. Ideal para uso profissional.",
+        "preco": "R$ 500,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+9"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 9",
+            "Detalhe 2 do Produto 9"
+        ]
+    },
+    {
+        "id": 10,
+        "nome": "Produto 10",
+        "descricao": "Descrição breve do Produto 10. Design elegante e moderno.",
+        "preco": "R$ 550,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+10"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 10",
+            "Detalhe 2 do Produto 10"
+        ]
+    },
+    {
+        "id": 11,
+        "nome": "Produto 11",
+        "descricao": "Descrição breve do Produto 11. Alta performance e durabilidade.",
+        "preco": "R$ 600,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+11"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 11",
+            "Detalhe 2 do Produto 11"
+        ]
+    },
+    {
+        "id": 12,
+        "nome": "Produto 12",
+        "descricao": "Descrição breve do Produto 12. Versatilidade para diferentes tarefas.",
+        "preco": "R$ 650,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+12"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 12",
+            "Detalhe 2 do Produto 12"
+        ]
+    },
+    {
+        "id": 13,
+        "nome": "Produto 13",
+        "descricao": "Descrição breve do Produto 13. Qualidade e eficiência.",
+        "preco": "R$ 700,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+13"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 13",
+            "Detalhe 2 do Produto 13"
+        ]
+    },
+    {
+        "id": 14,
+        "nome": "Produto 14",
+        "descricao": "Descrição breve do Produto 14. A solução para seu negócio.",
+        "preco": "R$ 750,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+14"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 14",
+            "Detalhe 2 do Produto 14"
+        ]
+    },
+    {
+        "id": 15,
+        "nome": "Produto 15",
+        "descricao": "Descrição breve do Produto 15. Ideal para uso em larga escala.",
+        "preco": "R$ 800,00",
+        "imagens": [
+            "https://via.placeholder.com/400x300?text=Produto+15"
+        ],
+        "detalhes": [
+            "Detalhe 1 do Produto 15",
+            "Detalhe 2 do Produto 15"
+        ]
+    }
+]
